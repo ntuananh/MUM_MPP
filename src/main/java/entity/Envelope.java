@@ -1,17 +1,17 @@
 package main.java.entity;
 
 public class Envelope extends Shipment {
-    public int quantity;
+    private int quantity;
+    
 
-    @Override
-    protected double getBaseFee() {
-        // TODO Auto-generated method stub
-        return 0;
+    public Envelope(int quantity) {
+        super();
+        this.quantity = quantity;
     }
 
-    @Override
-    public double feeCalc() {
-        // TODO Auto-generated method stub
-        return 0;
+
+    public int getQuantity() {
+        return quantity;
     }
+    
 }

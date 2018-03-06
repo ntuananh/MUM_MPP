@@ -19,18 +19,23 @@ public class Package extends Shipment {
         this.weight = weight;
     }
 
-
-    @Override
-    public double getBaseFee() {
-        // TODO Auto-generated method stub
-        return 2;
+    public double getDimension1() {
+        return dimension1;
     }
 
 
-    @Override
-    public double feeCalc() {
-        
-        return this.getBaseFee() + this.dimension1*this.dimension2*this.dimension3*this.weight;
+    public double getDimension2() {
+        return dimension2;
+    }
+
+
+    public double getDimension3() {
+        return dimension3;
+    }
+
+
+    public double getWeight() {
+        return weight;
     }
     
     
