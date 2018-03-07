@@ -1,5 +1,6 @@
 package main.java.entity;
-public class DimensionCalc implements IFeeCalculator {
+
+public class Quantity implements IFeeCalculator {
 
     @Override
     public double calcFee(Shipment shipment) {
