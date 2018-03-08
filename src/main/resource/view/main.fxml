@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<!-- <tabs> <Tab fx:id="fooTabPage" text="FooTab"> <fx:include source="main/resource/view/fooTabPage.fxml" 
+			/> </Tab> <Tab fx:id="barTabPage" text="BarTab"> <fx:include source="main/resource/view/barTabPage.fxml" 
+			/> </Tab> </tabs> -->
+		<TabPane prefHeight="429.0" prefWidth="397.0"
+			tabClosingPolicy="UNAVAILABLE">
+			<tabs>
+				<Tab fx:id="User" text="User">
+					<content>
+						<fx:include source="userTab.fxml" />
+					</content>
+				</Tab>
+				<Tab fx:id="Shipment" text="Shipment">
+					<content>
+						<fx:include source="shipmentTab.fxml" />
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+	</children>
+	<columnConstraints>
+		<ColumnConstraints />
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints />
+	</rowConstraints>
+</GridPane>

@@ -25,4 +25,10 @@ public class Location {
     public List<Shipment> getShipments() {
         return shipments;
     }
+
+    public String getName() {
+        return name;
+    }
+    
+    
 }

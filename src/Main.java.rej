@@ -1,0 +1,26 @@
+diff a/src/Main.java b/src/Main.java	(rejected hunks)
+@@ -11,15 +11,15 @@ public class Main extends Application {
+ 	}
+ 
+ 	@Override
+-	public void start(Stage primaryStage) throws Exception {
+-		primaryStage.setTitle("Welcome to MPP Project");
+-		Label label = new Label("Have a good project");
+-		StackPane root = new StackPane();
+-		root.getChildren().add(label);
+-
+-		Scene scene = new Scene(root, 300, 250);
+-		primaryStage.setScene(scene);
+-		primaryStage.show();
++	public void start(Stage stage) throws Exception {
++	    
++	    FXMLLoader loader = new FXMLLoader();
++	    loader.setLocation(getClass().getResource("main/resource/view/master.fxml"));
++	    
++	    Parent root = (Parent) loader.load();
++	    stage.setTitle("FXML Welcome");
++        stage.setScene(new Scene(root, 300, 275));
++        stage.show();
+ 
+ 	}
+ 

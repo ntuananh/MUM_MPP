@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane hgap="20.0" vgap="30.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<columnConstraints>
+		<ColumnConstraints />
+		<ColumnConstraints />
+		<ColumnConstraints />
+		<ColumnConstraints />
+		<ColumnConstraints />
+		<ColumnConstraints />
+		<ColumnConstraints />
+		<ColumnConstraints />
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints />
+		<RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+		<RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+		<RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+		<RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+		<RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+		<RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+		<RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+		<RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+		<RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+	</rowConstraints>
+	<children>
+		<TextField GridPane.columnIndex="2" GridPane.rowIndex="5" />
+		<Label maxWidth="100.0" minWidth="100.0" prefWidth="200.0" text="Type" />
+		<Button mnemonicParsing="false" text="Set Property" GridPane.columnIndex="4" />
+		<Label text="Service" GridPane.rowIndex="1" />
+		<RadioButton mnemonicParsing="false" text="Envelope" GridPane.columnIndex="1">
+			<toggleGroup>
+				<ToggleGroup fx:id="type" />
+			</toggleGroup>
+		</RadioButton>
+		<RadioButton mnemonicParsing="false" text="Package" toggleGroup="$type" GridPane.columnIndex="2" />
+		<RadioButton mnemonicParsing="false" text="Regular" GridPane.columnIndex="1" GridPane.rowIndex="1">
+			<toggleGroup>
+				<ToggleGroup fx:id="service" />
+			</toggleGroup>
+		</RadioButton>
+		<RadioButton mnemonicParsing="false" text="Express" toggleGroup="$service" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+		<Button mnemonicParsing="false" text="Calculate fee" GridPane.rowIndex="6" />
+		<Label text="To" GridPane.rowIndex="3" />
+		<ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+		<Label text="From" GridPane.rowIndex="4" />
+		<ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+			<padding>
+				<Insets left="10.0" />
+			</padding>
+		</ComboBox>
+		<Label text="Discount" GridPane.rowIndex="5" />
+		<ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+		<Label GridPane.columnIndex="1" GridPane.rowIndex="6">
+			<padding>
+				<Insets left="20.0" top="5.0" />
+			</padding>
+		</Label>
+      <Button mnemonicParsing="false" text="Ship!" GridPane.rowIndex="7" />
+	</children>
+	<padding>
+		<Insets left="20.0" top="20.0" />
+	</padding>
+</GridPane>

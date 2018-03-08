@@ -1,35 +1,69 @@
 package main.java.entity;
 
-public abstract class Shipment {
-    private int id;
-    private String fromLocation;
-    private String toLocation;
-    private Location currentLoction;
+public abstract class Shipment{
+    private String id;
+    private Location fromLocation;
+    private Location toLocation;
+    private Location currentLocation;
+    private double fee;
+    private Service service;
 
-    public Location getCurrentLoction() {
-        return currentLoction;
+    Shipment() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public String getFromLocation() {
+    public Location getFromLocation() {
         return fromLocation;
     }
 
-    public String getToLocation() {
+    public Location getToLocation() {
         return toLocation;
     }
 
-    public void setCurrentLoction(String currentLoction) {
-//        this.currentLoction = currentLoction;
-    }
-
-    public void setInformation(int id, String fromLocation, String toLocation) {
-        this.id = id;
+    public void setShippingInformation(Location fromLocation, Location toLocation, Service s) {
+//        this.id = id;
         this.fromLocation = fromLocation;
         this.toLocation = toLocation;
+        this.service = service;
     }
+
+    public double getFee() {
+        return fee;
+    }
+
+    public void setFee(double fee) {
+        this.fee = fee;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setFromLocation(Location fromLocation) {
+        this.fromLocation = fromLocation;
+    }
+
+    public void setToLocation(Location toLocation) {
+        this.toLocation = toLocation;
+    }
+
+    public void setCurrentLocation(Location currentLocation) {
+        this.currentLocation = currentLocation;
+    }
+     
+    
+    
+    
 
 }
