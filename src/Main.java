@@ -1,23 +1,14 @@
-import java.sql.SQLException;
-import java.util.List;
-
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import lesson6.lecture.javafx.secondwindow.SecondWindow;
-import main.java.database.DBUtils;
+import main.java.controller.ShipmentWindow;
 import main.java.entity.Customer;
-import mian.java.controller.ShipmentWindow;
 
 public class Main extends Application {
 
