@@ -12,67 +12,22 @@ import main.java.entity.Customer;
 
 public class Main extends Application {
 
-    @FXML
-    ListView<Customer> customerLV;
-    
-    @FXML
-    ToggleGroup typeTg;
-    
-    @FXML
-    ToggleGroup serviceTg;
-    
-    GridPane grid1 = null;
-    
-    Stage shipmentWindow;
+	GridPane grid1 = null;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+	Stage shipmentWindow;
 
-    @Override
-    public void start(Stage stage) throws Exception {
+	public static void main(String[] args) {
+		launch(args);
+	}
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("main/resource/view/shipment.fxml"));
-        Parent root = loader.load();
-        
-        createShipmentWindow(stage);
-        shipmentWindow.show();
+	@Override
+	public void start(Stage stage) throws Exception {
 
-//        customerLV = (ListView<Customer>) root.lookup("#customerLV");
+		shipmentWindow = new ShipmentWindow(stage);
+		shipmentWindow.show();
 
-//        List<Customer> allCustomer = DBUtils.getAllCustomer();
-//        ObservableList<Customer> items = FXCollections.observableArrayList(allCustomer);
-//        customerLV.setItems(items);
-//
-//        customerLV.setCellFactory(new Callback<ListView<Customer>, ListCell<Customer>>() {
-//
-//            @Override
-//            public ListCell<Customer> call(ListView<Customer> arg0) {
-//                ListCell<Customer> cell = new ListCell<Customer>() {
-//
-//                    @Override
-//                    protected void updateItem(Customer t, boolean bln) {
-//                        super.updateItem(t, bln);
-//                        if (t != null) {
-//                            setText(t.getName());
-//                        }
-//                    }
-//
-//                };
-//                return cell;
-//
-//            }
-//        });
-
-        stage.setTitle("Delivery Inc.");
-        stage.setScene(new Scene(root, 600, 300));
-        stage.show();
-    }
-
-    private void createShipmentWindow(Stage stage) {
-        shipmentWindow = new ShipmentWindow(stage);
-//        messageBar.setText("");
-    }
-
+		// stage.setTitle("Delivery Inc.");
+		// stage.setScene(new Scene(root, 600, 300));
+		// stage.show();
+	}
 }
