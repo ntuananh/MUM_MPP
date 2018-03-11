@@ -14,9 +14,12 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
+import main.java.Utils.Const;
 import main.java.database.DBUtils;
 import main.java.entity.Customer;
 import main.java.entity.Envelope;
@@ -38,6 +41,8 @@ public class ShipmentWindow extends Stage {
     ComboBox<Location> toLocCb;
     ComboBox<Customer> customerCb;
 
+    TextField quantityTf, dim1Tf, dim2Tf, dim3Tf, weightTf;
+
     Label feeLb;
 
     Shipment shipment;
@@ -52,7 +57,13 @@ public class ShipmentWindow extends Stage {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        // Shipment type
+        // Shipment type == R0
+        VBox typeVB = new VBox(3);
+
+        HBox evelopeHb = new HBox(5);
+
+        HBox packageHb = new HBox(3);
+        HBox packageHb2 = new HBox(3);
         typeTg = new ToggleGroup();
         Label typeLb = new Label("Type");
         RadioButton envelopeRb = new RadioButton("Envelope");
@@ -60,12 +71,35 @@ public class ShipmentWindow extends Stage {
         RadioButton packageRb = new RadioButton("Package");
         packageRb.setToggleGroup(typeTg);
 
-        Button propertyBtn = new Button("Set Property");
+        quantityTf = new TextField();
+        quantityTf.setPromptText("Quantity");
 
-        grid.add(typeLb, 0, 0);
-        grid.add(envelopeRb, 1, 0);
-        grid.add(packageRb, 2, 0);
-        grid.add(propertyBtn, 3, 0);
+        dim1Tf = new TextField();
+        dim1Tf.setPromptText("Dimension 1");
+        // dim1Tf.setPrefWidth(100);
+
+        dim2Tf = new TextField();
+        dim2Tf.setPromptText("Dimension 2");
+        // dim1Tf.setPrefWidth(100);
+
+        dim3Tf = new TextField();
+        dim3Tf.setPromptText("Dimension 3");
+        // dim1Tf.setPrefWidth(100);
+
+        weightTf = new TextField();
+        weightTf.setPromptText("Weight");
+        // dim1Tf.setPrefWidth(100);
+
+        Label mockLb = new Label();
+        mockLb.setPrefWidth(66);
+
+        evelopeHb.getChildren().addAll(envelopeRb, quantityTf);
+        packageHb.getChildren().addAll(packageRb, dim1Tf, dim2Tf);
+        packageHb2.getChildren().addAll(mockLb, dim3Tf, weightTf);
+        typeVB.getChildren().addAll(evelopeHb, packageHb, packageHb2);
+
+        grid.add(typeVB, 0, 0);
+        GridPane.setColumnSpan(typeVB, 4);
 
         // Service Type
         serviceTg = new ToggleGroup();
@@ -226,7 +260,7 @@ public class ShipmentWindow extends Stage {
         });
         grid.add(shipBtn, 0, 8);
 
-        Scene scene = new Scene(grid, 500, 300);
+        Scene scene = new Scene(grid, 600, 350);
         setScene(scene);
     }
 
@@ -235,15 +269,17 @@ public class ShipmentWindow extends Stage {
         System.out.println(type.getText());
         shipment = null;
         if (type.getText().equalsIgnoreCase("envelope")) {
-            int quantity = 1; // TODO
+            int quantity = Integer.parseInt(quantityTf.getText());
             shipment = new Envelope(quantity);
+            shipment.setType(Const.SHIPMENT_ENVELOPE);
         } else if (type.getText().equalsIgnoreCase("package")) {
-            int dim1 = 2;
-            int dim2 = 3;
-            int dim3 = 4;
-            int weight = 5;
+            int dim1 = Integer.parseInt(dim1Tf.getText());
+            int dim2 = Integer.parseInt(dim2Tf.getText());
+            int dim3 = Integer.parseInt(dim3Tf.getText());
+            int weight = Integer.parseInt(weightTf.getText());
 
             shipment = new Package(dim1, dim2, dim3, weight);
+            shipment.setType(Const.SHIPMENT_PACKAGE);
         }
 
         Location fromLoc = fromLocCb.getValue();
@@ -265,7 +301,7 @@ public class ShipmentWindow extends Stage {
         customer.getShipments().add(shipment);
         IFeeCalculator feecal = shipment.getFeeCalculator();
         double fee = feecal.calcFee(shipment);
-        feeLb.setText(String.valueOf(fee));
+        feeLb.setText("$" + String.valueOf(fee));
 
     }
 

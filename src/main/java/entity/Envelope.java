@@ -9,6 +9,9 @@ public class Envelope extends Shipment {
 		this.feeCalculator = new QuantityCalc();
     }
 
+    public Envelope() {
+    }
+    
     public int getQuantity() {
         return quantity;
     }

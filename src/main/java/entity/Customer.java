@@ -14,6 +14,11 @@ public class Customer {
         shipments = new ArrayList<Shipment>();
     }
 
+    public Customer(String name) {
+        this.name = name;
+        shipments = new ArrayList<Shipment>();
+    }
+    
     public int getId() {
         return id;
     }

@@ -1,77 +1,101 @@
 package main.java.entity;
 
-public abstract class Shipment{
-	private String id;
-	private Location fromLocation;
-	private Location toLocation;
-	private Location currentLocation;
-	private double fee;
-	private Service service;
-	private Customer customer;
-	protected IFeeCalculator feeCalculator;
+public abstract class Shipment {
+    private String id;
+    private Location fromLocation;
+    private Location toLocation;
+    private Location currentLocation;
+    private double fee;
+    private Service service;
+    private Customer customer;
+    protected IFeeCalculator feeCalculator;
+    protected int type;
+    protected String trackingNumber;
 
-	Shipment() {
-	}
+    public int getType() {
+        return type;
+    }
 
-	String getId() {
-		return id;
-	}
+    public void setType(int type) {
+        this.type = type;
+    }
 
-	Location getFromLocation() {
-		return fromLocation;
-	}
+    Shipment() {
+    }
 
-	Location getToLocation() {
-		return toLocation;
-	}
+    String getId() {
+        return id;
+    }
 
-	public void setShippingInformation(Location fromLocation, Location toLocation, Service s) {
-		// this.id = id;
-		this.fromLocation = fromLocation;
-		this.toLocation = toLocation;
-		this.service = service;
-	}
+    public Location getFromLocation() {
+        return fromLocation;
+    }
 
-	public double getFee() {
-		return fee;
-	}
+    public Location getToLocation() {
+        return toLocation;
+    }
 
-	public void setFee(double fee) {
-		this.fee = fee;
-	}
+    public void setShippingInformation(Location fromLocation, Location toLocation, Service service) {
+        // this.id = id;
+        this.fromLocation = fromLocation;
+        this.toLocation = toLocation;
+        this.service = service;
+    }
 
-	public Service getService() {
-		return service;
-	}
+    public double getFee() {
+        return fee;
+    }
 
-	public void setService(Service service) {
-		this.service = service;
-	}
+    public void setFee(double fee) {
+        this.fee = fee;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public Service getService() {
+        return service;
+    }
 
-	public void setFromLocation(Location fromLocation) {
-		this.fromLocation = fromLocation;
-	}
+    public void setService(Service service) {
+        this.service = service;
+    }
 
-	public void setToLocation(Location toLocation) {
-		this.toLocation = toLocation;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public void setCurrentLocation(Location currentLocation) {
-		this.currentLocation = currentLocation;
-	}
+    public void setFromLocation(Location fromLocation) {
+        this.fromLocation = fromLocation;
+    }
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+    public Location getCurrentLocation() {
+        return currentLocation;
+    }
 
-	public IFeeCalculator getFeeCalculator() {
-		return feeCalculator;
-	}
-	
-	
+    public void setToLocation(Location toLocation) {
+        this.toLocation = toLocation;
+    }
+
+    public void setCurrentLocation(Location currentLocation) {
+        this.currentLocation = currentLocation;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public IFeeCalculator getFeeCalculator() {
+        return feeCalculator;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public String getTrackingNumber() {
+        return trackingNumber;
+    }
+
+    public void setTrackingNumber(String trackingNumber) {
+        this.trackingNumber = trackingNumber;
+    }
 
 }

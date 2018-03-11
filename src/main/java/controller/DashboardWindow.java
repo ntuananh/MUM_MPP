@@ -13,6 +13,8 @@ public class DashboardWindow extends Stage {
     
     TrackingWindow trackingWindow;
     ShipmentWindow shipmentWindow;
+    CustomerWindow customerWindow;
+    LocationWindow locationWindow;
 
     public DashboardWindow(Stage stage) {
         super();
@@ -25,7 +27,9 @@ public class DashboardWindow extends Stage {
 
         Button trackingBtn = new Button("Tracking");
         Button createShipmentBtn = new Button("Create Shipment");
-        Button manageShipment = new Button("Mangage Shipment");
+        Button locationManagement = new Button("Mangage Location");
+        Button customerMangement = new Button("Manage Customer");
+        
         
         trackingBtn.setOnAction((evt)->{
             trackingWindow = new TrackingWindow(stage);
@@ -36,10 +40,21 @@ public class DashboardWindow extends Stage {
             shipmentWindow = new ShipmentWindow(stage);
             shipmentWindow.show();
         });
+        
+        locationManagement.setOnAction((evt)->{
+            locationWindow = new LocationWindow(stage);
+            locationWindow.show();
+        });
+        
+        customerMangement.setOnAction((evt)->{
+            customerWindow = new CustomerWindow(stage);
+            customerWindow.show();
+        });
 
         grid.add(trackingBtn, 0, 0);
         grid.add(createShipmentBtn, 0, 1);
-        grid.add(manageShipment, 0, 2);
+        grid.add(locationManagement, 0, 2);
+        grid.add(customerMangement, 0, 3);
 
         Scene scene = new Scene(grid, 500, 300);
         setScene(scene);
