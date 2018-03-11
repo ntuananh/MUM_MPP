@@ -45,6 +45,7 @@ public class ReportWindow extends Stage {
         TableColumn<String[], String> fromCol = new TableColumn<String[], String>("From");
         TableColumn<String[], String> toCol = new TableColumn<String[], String>("To");
         TableColumn<String[], String> trackingCol = new TableColumn<String[], String>("Tracking");
+        TableColumn<String[], String> currentCol = new TableColumn<String[], String>("Current");
 
         typeCol.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
@@ -80,7 +81,7 @@ public class ReportWindow extends Stage {
                         return new SimpleStringProperty(arg0.getValue()[3]);
                     }
                 });
-        trackingCol.setCellValueFactory(
+        currentCol.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
 
                     @Override
@@ -88,8 +89,16 @@ public class ReportWindow extends Stage {
                         return new SimpleStringProperty(arg0.getValue()[4]);
                     }
                 });
+        trackingCol.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
 
-        table.getColumns().addAll(typeCol, serviceCol, fromCol, toCol, trackingCol);
+                    @Override
+                    public ObservableValue<String> call(CellDataFeatures<String[], String> arg0) {
+                        return new SimpleStringProperty(arg0.getValue()[5]);
+                    }
+                });
+
+        table.getColumns().addAll(typeCol, serviceCol, fromCol, toCol, currentCol, trackingCol);
         table.setItems(data);
 
         grid.add(table, 0, 0);

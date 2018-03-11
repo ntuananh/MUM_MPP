@@ -60,7 +60,7 @@ public class DBUtils {
     }
 
     public static void saveShipement(Shipment s) {
-        String sql = "INSERT INTO Shipment(type, service_id, from_loc, to_loc, customer_id, tracking_number) VALUES (?,?, ?, ? , ?, ?)";
+        String sql = "INSERT INTO Shipment(type, service_id, from_loc, to_loc, customer_id, tracking_number, current_loc) VALUES (?,?, ?, ? , ?, ?, ?)";
 
         try {
             String trackingNumber = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
@@ -71,6 +71,7 @@ public class DBUtils {
             pstmt.setInt(4, s.getToLocation().getId());
             pstmt.setInt(5, s.getCustomer().getId());
             pstmt.setString(6, trackingNumber);
+            pstmt.setInt(7, s.getCurrentLocation().getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -113,8 +114,8 @@ public class DBUtils {
     }
 
     public static List<String[]> findShipments(Customer customer) {
-        String sql = "SELECT type, sv.id service_id, sv.name service_name, l1.name from_loc, l2.name to_loc, tracking_number from Shipment s "
-                + "join Location l1 on s.from_loc = l1.id " + "join Location l2 on s.to_loc = l2.id "
+        String sql = "SELECT type, sv.id service_id, sv.name service_name, l1.name from_loc, l2.name to_loc, l3.name current_loc, tracking_number from Shipment s "
+                + "join Location l1 on s.from_loc = l1.id " + "join Location l2 on s.to_loc = l2.id " + "join Location l3 on s.current_loc = l3.id "
                 + "join Service sv on s.service_id = sv.id " + "where customer_id = '" + customer.getId() + "'";
 
         try {
@@ -131,7 +132,7 @@ public class DBUtils {
                 } else if(rs.getInt(1) == 2) {
                     serviceName = "Package";
                 }
-                list.add(new String[] {serviceName, rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
+                list.add(new String[] {serviceName, rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)});
             }
             return list;
         } catch (SQLException e) {
@@ -142,8 +143,8 @@ public class DBUtils {
     }
     
     public static List<String[]> findShipments(Location location) {
-        String sql = "SELECT type, sv.id service_id, sv.name service_name, l1.name from_loc, l2.name to_loc, tracking_number from Shipment s "
-                + "join Location l1 on s.from_loc = l1.id " + "join Location l2 on s.to_loc = l2.id "
+        String sql = "SELECT type, sv.id service_id, sv.name service_name, l1.name from_loc, l2.name to_loc, tracking_number, l3.name current_loc from Shipment s "
+                + "join Location l1 on s.from_loc = l1.id " + "join Location l2 on s.to_loc = l2.id "+ "join Location l3 on s.current_loc = l3.id "
                 + "join Service sv on s.service_id = sv.id " + "where s.current_loc = '" + location.getId() + "'";
 
         try {
@@ -160,7 +161,7 @@ public class DBUtils {
                 } else if(rs.getInt(1) == 2) {
                     serviceName = "Package";
                 }
-                list.add(new String[] {serviceName, rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
+                list.add(new String[] {serviceName, rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)});
             }
             return list;
         } catch (SQLException e) {

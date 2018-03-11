@@ -42,6 +42,7 @@ public class ShipmentAtLocationWindow extends Stage {
         TableColumn<String[], String> serviceCol = new TableColumn<String[], String>("Service");
         TableColumn<String[], String> fromCol = new TableColumn<String[], String>("From");
         TableColumn<String[], String> toCol = new TableColumn<String[], String>("To");
+        TableColumn<String[], String> curCol = new TableColumn<String[], String>("Current");
         TableColumn<String[], String> trackingCol = new TableColumn<String[], String>("Tracking");
 
         typeCol.setCellValueFactory(
@@ -78,6 +79,14 @@ public class ShipmentAtLocationWindow extends Stage {
                         return new SimpleStringProperty(arg0.getValue()[3]);
                     }
                 });
+        curCol.setCellValueFactory(
+                new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
+
+                    @Override
+                    public ObservableValue<String> call(CellDataFeatures<String[], String> arg0) {
+                        return new SimpleStringProperty(arg0.getValue()[5]);
+                    }
+                });
         trackingCol.setCellValueFactory(
                 new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
 
@@ -87,7 +96,7 @@ public class ShipmentAtLocationWindow extends Stage {
                     }
                 });
 
-        table.getColumns().addAll(typeCol, serviceCol, fromCol, toCol, trackingCol);
+        table.getColumns().addAll(typeCol, serviceCol, fromCol, toCol, curCol, trackingCol);
         table.setItems(data);
 
         grid.add(table, 0, 0);
