@@ -8,7 +8,7 @@ import main.java.entity.Package;
 import main.java.Utils.Const;
 import main.java.entity.Envelope;
 
-public class Shipment extends BaseModel {
+public class ShipmentModel extends BaseModel {
 //    public List<Shipment> getAll(){
 //        String sql = "SELECT s.id, type, service, from, to, customer,  FROM Shipment s INNER JOIN Pakage p O s.id = p.id INNER JOIN Envelope e ON s.id= e.shipment_id";
 //        

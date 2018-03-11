@@ -2,14 +2,12 @@ package main.java.entity;
 
 public class Envelope extends Shipment {
     private int quantity;
+	protected IFeeCalculator feeCalculator;
 
     public Envelope(int quantity) {
         super();
         this.quantity = quantity;
-    }
-    
-    Envelope(){
-        
+		this.feeCalculator = new QuantityCalc();
     }
 
     public int getQuantity() {
@@ -25,4 +23,5 @@ public class Envelope extends Shipment {
         // + this.getToLocation().getName());
         return sb.toString();
     }
+
 }

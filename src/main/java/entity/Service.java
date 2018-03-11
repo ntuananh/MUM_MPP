@@ -5,7 +5,7 @@ public class Service {
     private String name;
     private double baseRate;
     
-    Service(){}
+    public Service(){}
 
     public int getId() {
         return id;
@@ -24,7 +24,7 @@ public class Service {
     }
 
     public double getBaseRate() {
-        return baseRate;
+        return this.baseRate;
     }
 
     public void setBaseRate(double baseRate) {

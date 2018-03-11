@@ -5,17 +5,40 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.StringConverter;
 import main.java.database.DBUtils;
 import main.java.entity.Customer;
+import main.java.entity.Envelope;
+import main.java.entity.Express;
+import main.java.entity.IFeeCalculator;
 import main.java.entity.Location;
+import main.java.entity.Package;
+import main.java.entity.Regular;
+import main.java.entity.Service;
+import main.java.entity.Shipment;
 
 public class ShipmentWindow extends Stage {
 	Stage primaryStage;
 	GridPane grid = new GridPane();
+	ToggleGroup typeTg;
+	ToggleGroup serviceTg;
+
+	ComboBox<Location> fromLocCb;
+	ComboBox<Location> toLocCb;
+	ComboBox<Customer> customerCb;
+
+	Label feeLb;
 
 	public ShipmentWindow(Stage stage) {
 
@@ -28,7 +51,7 @@ public class ShipmentWindow extends Stage {
 		grid.setPadding(new Insets(25, 25, 25, 25));
 
 		// Shipment type
-		ToggleGroup typeTg = new ToggleGroup();
+		typeTg = new ToggleGroup();
 		Label typeLb = new Label("Type");
 		RadioButton envelopeRb = new RadioButton("Envelope");
 		envelopeRb.setToggleGroup(typeTg);
@@ -43,7 +66,7 @@ public class ShipmentWindow extends Stage {
 		grid.add(propertyBtn, 3, 0);
 
 		// Service Type
-		ToggleGroup serviceTg = new ToggleGroup();
+		serviceTg = new ToggleGroup();
 		Label service = new Label("Service");
 		RadioButton regularRb = new RadioButton("Regular");
 		regularRb.setToggleGroup(serviceTg);
@@ -57,7 +80,7 @@ public class ShipmentWindow extends Stage {
 		// From location
 		Label fromLb = new Label("From");
 		ObservableList<Location> locations = FXCollections.observableArrayList(DBUtils.getAllLocation());
-		ComboBox<Location> fromLocCb = new ComboBox<>(locations);
+		fromLocCb = new ComboBox<>(locations);
 		fromLocCb.setCellFactory(new Callback<ListView<Location>, ListCell<Location>>() {
 
 			@Override
@@ -74,6 +97,24 @@ public class ShipmentWindow extends Stage {
 				return cell;
 			}
 		});
+
+		fromLocCb.setConverter(new StringConverter<Location>() {
+
+			@Override
+			public String toString(Location arg0) {
+				return arg0.getName();
+			}
+
+			@Override
+			public Location fromString(String arg0) {
+				return null;
+			}
+		});
+
+		// fromLocCb.valueProperty().addListener((option, oldVal, newVal) -> {
+		// fromLocCb.setValue(newVal);
+		// });
+
 		grid.add(fromLb, 0, 2);
 		grid.add(fromLocCb, 1, 2);
 
@@ -81,7 +122,7 @@ public class ShipmentWindow extends Stage {
 		Label toLb = new Label("To");
 		// ObservableList<Location> locations =
 		// FXCollections.observableArrayList(DBUtils.getAllLocation());
-		ComboBox<Location> toLocCb = new ComboBox<>(locations);
+		toLocCb = new ComboBox<>(locations);
 		toLocCb.setCellFactory(new Callback<ListView<Location>, ListCell<Location>>() {
 
 			@Override
@@ -98,13 +139,26 @@ public class ShipmentWindow extends Stage {
 				return cell;
 			}
 		});
+
+		toLocCb.setConverter(new StringConverter<Location>() {
+
+			@Override
+			public String toString(Location arg0) {
+				return arg0.getName();
+			}
+
+			@Override
+			public Location fromString(String arg0) {
+				return null;
+			}
+		});
 		grid.add(toLb, 0, 3);
 		grid.add(toLocCb, 1, 3);
 
 		// Customer
 		Label customerLb = new Label("Customer");
 		ObservableList<Customer> customers = FXCollections.observableArrayList(DBUtils.getAllCustomer());
-		ComboBox<Customer> customerCb = new ComboBox<>(customers);
+		customerCb = new ComboBox<>(customers);
 		customerCb.setCellFactory(new Callback<ListView<Customer>, ListCell<Customer>>() {
 
 			@Override
@@ -119,6 +173,19 @@ public class ShipmentWindow extends Stage {
 					}
 				};
 				return cell;
+			}
+		});
+
+		customerCb.setConverter(new StringConverter<Customer>() {
+
+			@Override
+			public String toString(Customer arg0) {
+				return arg0.getName();
+			}
+
+			@Override
+			public Customer fromString(String arg0) {
+				return null;
 			}
 		});
 		grid.add(customerLb, 0, 5);
@@ -140,10 +207,12 @@ public class ShipmentWindow extends Stage {
 
 		// Fee Button
 		Button calFeeBtn = new Button("Calculate fee");
-		Label feeLb = new Label();
+		feeLb = new Label();
 		calFeeBtn.setOnAction(e -> {
 			feeLb.setText("Calculating...");
 		});
+		calFeeBtn.setOnAction((event) -> calcFee());
+
 		grid.add(calFeeBtn, 0, 7);
 		grid.add(feeLb, 1, 7);
 
@@ -155,6 +224,45 @@ public class ShipmentWindow extends Stage {
 
 		Scene scene = new Scene(grid, 500, 300);
 		setScene(scene);
+	}
+
+	private void calcFee() {
+		RadioButton type = (RadioButton) typeTg.getSelectedToggle();
+		System.out.println(type.getText());
+		Shipment s = null;
+		if (type.getText().equalsIgnoreCase("envelope")) {
+			int quantity = 1; // TODO
+			s = new Envelope(quantity);
+		} else if (type.getText().equalsIgnoreCase("package")) {
+			int dim1 = 2;
+			int dim2 = 3;
+			int dim3 = 4;
+			int weight = 5;
+
+			s = new Package(dim1, dim2, dim3, weight);
+		}
+
+		Location fromLoc = fromLocCb.getValue();
+		Location toLoc = toLocCb.getValue();
+		RadioButton serviceRb = (RadioButton) serviceTg.getSelectedToggle();
+
+		Service service = null;
+		if (serviceRb.getText().equalsIgnoreCase("regular")) {
+			service = new Regular();
+		} else {
+			service = new Express();
+		}
+
+		Customer customer = customerCb.getValue();
+
+		s.setShippingInformation(fromLoc, toLoc, service);
+		s.setCurrentLocation(fromLoc);
+		s.setCustomer(customer);
+		customer.getShipments().add(s);
+		IFeeCalculator feecal = s.getFeeCalculator();
+		double fee = feecal.calcFee(s);
+		feeLb.setText(String.valueOf(fee));
+
 	}
 
 }
