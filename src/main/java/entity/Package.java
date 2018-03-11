@@ -35,14 +35,4 @@ public class Package extends Shipment {
         return weight;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Shipment infomation");
-        // sb.append("\tId: " + this.getId() + ", sent from " +
-        // this.getFromLocation().getName() + " to "
-        // + this.getToLocation().getName());
-        return sb.toString();
-    }
-
 }

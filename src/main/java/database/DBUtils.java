@@ -80,8 +80,8 @@ public class DBUtils {
     }
 
     public static Map<String, String> findShipment(String trackingNumber) {
-        String sql = "SELECT type, l1.name from_loc, l2.name to_loc from Shipment s join Location l1 on s.from_loc = l1.id "
-                + "join Location l2 on s.to_loc = l2.id " + "where tracking_number = '" + trackingNumber + "'";
+        String sql = "SELECT type, l1.name from_loc, l2.name to_loc, l3.name current_loc from Shipment s join Location l1 on s.from_loc = l1.id "
+                + "join Location l2 on s.to_loc = l2.id " + "join Location l3 on s.current_loc = l3.id " + "where tracking_number = '" + trackingNumber + "'";
 
         try {
             Statement stmt = conn.createStatement();
@@ -91,6 +91,7 @@ public class DBUtils {
             while (rs.next()) {
                 map.put("from_loc", rs.getString(2));
                 map.put("to_loc", rs.getString(3));
+                map.put("current_loc", rs.getString(4));
             }
             return map;
         } catch (SQLException e) {

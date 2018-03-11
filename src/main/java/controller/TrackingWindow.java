@@ -63,6 +63,6 @@ public class TrackingWindow extends Stage{
         Map<String, String> findShipment = DBUtils.findShipment(trackingNumber);
         fLocationLb.setText(findShipment.get("from_loc"));
         tLocation.setText(findShipment.get("to_loc"));
-        cLocation.setText("N/A");
+        cLocation.setText(findShipment.get("current_loc"));
     }
 }

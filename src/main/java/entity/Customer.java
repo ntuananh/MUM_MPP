@@ -18,7 +18,7 @@ public class Customer {
         this.name = name;
         shipments = new ArrayList<Shipment>();
     }
-    
+
     public int getId() {
         return id;
     }
