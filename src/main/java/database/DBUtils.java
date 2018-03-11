@@ -51,14 +51,14 @@ public class DBUtils {
 		return locations;
 	}
 
-	// public static void saveShipement(Shipment s) {
-	// String sql = "INSERT INTO Shipment(type, service, from, to, customer) VALUES
-	// (?,?, ?, ? , ?)";
-	//
-	// if(s.getClass() == Package.class)
-	// PreparedStatement pstmt = conn.prepareStatement(sql);
-	// pstmt.setInt(1, s.get().getId());
-	// pstmt.setDouble(2, capacity);
-	// pstmt.executeUpdate();
-	// }
+	 public static void saveShipement(Shipment s) {
+        // String sql = "INSERT INTO Shipment(type, service, from, to, customer) VALUES
+        // (?,?, ?, ? , ?)";
+        //
+        // if(s.getClass() == Package.class)
+        // PreparedStatement pstmt = conn.prepareStatement(sql);
+        // pstmt.setInt(1, s.get().getId());
+        // pstmt.setDouble(2, capacity);
+        // pstmt.executeUpdate();
+	 }
 }

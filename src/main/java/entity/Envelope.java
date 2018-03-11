@@ -2,7 +2,6 @@ package main.java.entity;
 
 public class Envelope extends Shipment {
     private int quantity;
-	protected IFeeCalculator feeCalculator;
 
     public Envelope(int quantity) {
         super();

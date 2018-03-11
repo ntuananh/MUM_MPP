@@ -33,7 +33,7 @@ public class LoginWindow extends Stage {
 		loginBtn.setOnAction((evt)->{
 		    dashboardWindow = new DashboardWindow(stage);
 		    dashboardWindow.show();
-		    stage.hide();
+		    this.close();
 		});
 		
 		grid.add(emailLb, 0, 0);
