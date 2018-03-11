@@ -7,10 +7,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import main.java.controller.EnvelopeWindow;
-import main.java.controller.PackageWindow;
 import main.java.controller.ShipmentWindow;
-import main.java.controller.TrackingWindow;
 import main.java.entity.Customer;
 
 public class Main extends Application {
@@ -26,10 +23,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 
-		shipmentWindow = new EnvelopeWindow(stage);
+		shipmentWindow = new ShipmentWindow(stage);
 		shipmentWindow.show();
-		
-		
 
 		// stage.setTitle("Delivery Inc.");
 		// stage.setScene(new Scene(root, 600, 300));
