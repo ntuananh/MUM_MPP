@@ -6,6 +6,6 @@ public class Regular extends Service {
     public Regular() {
         this.setId(Const.SERVICE_REGULAR);
         this.setName("Regular");
-        this.setBaseRate(1.0);
+        this.setBaseRate(1.5);
     }
 }

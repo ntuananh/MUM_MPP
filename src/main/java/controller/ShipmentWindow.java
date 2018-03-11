@@ -21,12 +21,15 @@ import javafx.util.Callback;
 import javafx.util.StringConverter;
 import main.java.Utils.Const;
 import main.java.database.DBUtils;
+import main.java.entity.CashDiscount;
 import main.java.entity.Customer;
+import main.java.entity.Discount;
 import main.java.entity.Envelope;
 import main.java.entity.Express;
 import main.java.entity.IFeeCalculator;
 import main.java.entity.Location;
 import main.java.entity.Package;
+import main.java.entity.PercentDiscount;
 import main.java.entity.Regular;
 import main.java.entity.Service;
 import main.java.entity.Shipment;
@@ -36,12 +39,14 @@ public class ShipmentWindow extends Stage {
     GridPane grid = new GridPane();
     ToggleGroup typeTg;
     ToggleGroup serviceTg;
+    ToggleGroup discountTg;
 
     ComboBox<Location> fromLocCb;
     ComboBox<Location> toLocCb;
     ComboBox<Customer> customerCb;
 
     TextField quantityTf, dim1Tf, dim2Tf, dim3Tf, weightTf;
+    TextField discountValTf;
 
     Label feeLb;
 
@@ -229,17 +234,21 @@ public class ShipmentWindow extends Stage {
 
         // Discount
         Label discountLb = new Label("Discount");
-        ToggleGroup discountTg = new ToggleGroup();
+        discountTg = new ToggleGroup();
+        RadioButton noneRb = new RadioButton("None");
+        noneRb.setToggleGroup(discountTg);
+
         RadioButton cashRb = new RadioButton("Cash");
         cashRb.setToggleGroup(discountTg);
         RadioButton percentRb = new RadioButton("Percent");
         percentRb.setToggleGroup(discountTg);
-        TextField discountValTf = new TextField();
+        discountValTf = new TextField();
         discountValTf.setPromptText("Discount value");
         grid.add(discountLb, 0, 6);
-        grid.add(cashRb, 1, 6);
-        grid.add(percentRb, 2, 6);
-        grid.add(discountValTf, 3, 6);
+        grid.add(noneRb, 1, 6);
+        grid.add(cashRb, 2, 6);
+        grid.add(percentRb, 3, 6);
+        grid.add(discountValTf, 4, 6);
 
         // Fee Button
         Button calFeeBtn = new Button("Calculate fee");
@@ -266,7 +275,6 @@ public class ShipmentWindow extends Stage {
 
     private void calcFee() {
         RadioButton type = (RadioButton) typeTg.getSelectedToggle();
-        System.out.println(type.getText());
         shipment = null;
         if (type.getText().equalsIgnoreCase("envelope")) {
             int quantity = Integer.parseInt(quantityTf.getText());
@@ -299,8 +307,19 @@ public class ShipmentWindow extends Stage {
         shipment.setCurrentLocation(fromLoc);
         shipment.setCustomer(customer);
         customer.getShipments().add(shipment);
+
+        RadioButton discountRb = (RadioButton) discountTg.getSelectedToggle();
+        Discount discount = null;
+        if (discountRb.getText().equalsIgnoreCase("none")) {
+            discount = new CashDiscount(0);
+        } else if (discountRb.getText().equalsIgnoreCase("cash")) {
+            discount = new CashDiscount(Double.parseDouble(discountValTf.getText()));
+        } else if (discountRb.getText().equalsIgnoreCase("percent")) {
+            discount = new PercentDiscount(Double.parseDouble(discountValTf.getText()));
+        }
+
         IFeeCalculator feecal = shipment.getFeeCalculator();
-        double fee = feecal.calcFee(shipment);
+        double fee = feecal.calcFee(shipment, discount);
         feeLb.setText("$" + String.valueOf(fee));
 
     }

@@ -11,6 +11,7 @@ public abstract class Shipment {
     protected IFeeCalculator feeCalculator;
     protected int type;
     protected String trackingNumber;
+    Discount discount;
 
     public int getType() {
         return type;

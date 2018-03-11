@@ -6,6 +6,6 @@ public class Express extends Service {
     public Express() {
         this.setId(Const.SERVICE_EXPRESS);
         this.setName("Express");
-        this.setBaseRate(2.0);
+        this.setBaseRate(2.5);
     }
 }
