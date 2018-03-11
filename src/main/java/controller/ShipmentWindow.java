@@ -153,7 +153,7 @@ public class ShipmentWindow extends Stage {
 		});
 		grid.add(shipBtn, 0, 8);
 
-		Scene scene = new Scene(grid, 500, 300);
+		Scene scene = new Scene(grid, 1000, 600);
 		setScene(scene);
 	}
 
