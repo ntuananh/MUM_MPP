@@ -10,10 +10,13 @@ import javafx.stage.Stage;
 public class DashboardWindow extends Stage {
     Stage primaryStage;
     GridPane grid = new GridPane();
+    
+    TrackingWindow trackingWindow;
+    ShipmentWindow shipmentWindow;
 
-    public DashboardWindow(Stage primaryStage) {
+    public DashboardWindow(Stage stage) {
         super();
-        this.primaryStage = primaryStage;
+        this.primaryStage = stage;
 
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -23,6 +26,16 @@ public class DashboardWindow extends Stage {
         Button trackingBtn = new Button("Tracking");
         Button createShipmentBtn = new Button("Create Shipment");
         Button manageShipment = new Button("Mangage Shipment");
+        
+        trackingBtn.setOnAction((evt)->{
+            trackingWindow = new TrackingWindow(stage);
+            trackingWindow.show();
+        });
+        
+        createShipmentBtn.setOnAction((evt)->{
+            shipmentWindow = new ShipmentWindow(stage);
+            shipmentWindow.show();
+        });
 
         grid.add(trackingBtn, 0, 0);
         grid.add(createShipmentBtn, 0, 1);

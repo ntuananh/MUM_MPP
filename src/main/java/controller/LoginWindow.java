@@ -9,11 +9,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class LoginWindow extends Stage{
-	Stage primaryStage;
-	GridPane grid = new GridPane();
-	
-	public LoginWindow(Stage stage) {
+public class LoginWindow extends Stage {
+    Stage primaryStage;
+    GridPane grid = new GridPane();
+
+    Stage dashboardWindow;
+
+    public LoginWindow(Stage stage) {
 		// TODO Auto-generated constructor stub
 		
 		this.primaryStage = stage;
@@ -24,13 +26,19 @@ public class LoginWindow extends Stage{
 		grid.setVgap(10);
 		grid.setPadding(new Insets(25, 25, 25, 25));
 		
-		Label quantityLb = new Label("Email");
-		TextField quantityTF = new TextField();
-		Button calFeeBtn = new Button("Sign In");
+		Label emailLb = new Label("Email");
+		TextField emailTf = new TextField();
+		Button loginBtn = new Button("Sign In");
 		
-		grid.add(quantityLb, 0, 0);
-		grid.add(quantityTF, 1, 0);
-		grid.add(calFeeBtn, 1, 1);
+		loginBtn.setOnAction((evt)->{
+		    dashboardWindow = new DashboardWindow(stage);
+		    dashboardWindow.show();
+		    stage.hide();
+		});
+		
+		grid.add(emailLb, 0, 0);
+		grid.add(emailTf, 1, 0);
+		grid.add(loginBtn, 1, 1);
 		
 		//View Window
 		Scene scene = new Scene(grid, 500, 300);
