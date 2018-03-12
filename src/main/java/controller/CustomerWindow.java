@@ -75,7 +75,6 @@ public class CustomerWindow extends Stage {
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                     if (mouseEvent.getClickCount() == 2) {
                         Customer c = customerLv.getSelectionModel().getSelectedItem();
-                        System.out.println(c.getName());
                         ReportWindow reportWindow = new ReportWindow(stage, c);
                         reportWindow.show();
                     }

@@ -64,7 +64,6 @@ public class LocationWindow  extends Stage {
                 if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
                     if (mouseEvent.getClickCount() == 2) {
                         Location c = locationLv.getSelectionModel().getSelectedItem();
-                        System.out.println(c.getName());
                         ShipmentAtLocationWindow shipWindow = new ShipmentAtLocationWindow(stage, c);
                         shipWindow.show();
                     }
