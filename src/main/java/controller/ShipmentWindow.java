@@ -72,9 +72,11 @@ public class ShipmentWindow extends Stage {
         typeTg = new ToggleGroup();
         Label typeLb = new Label("Type");
         RadioButton envelopeRb = new RadioButton("Envelope");
+
         envelopeRb.setToggleGroup(typeTg);
         RadioButton packageRb = new RadioButton("Package");
         packageRb.setToggleGroup(typeTg);
+
 
         quantityTf = new TextField();
         quantityTf.setPromptText("Quantity");

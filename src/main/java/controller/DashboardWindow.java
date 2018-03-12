@@ -30,6 +30,12 @@ public class DashboardWindow extends Stage {
         Button locationManagement = new Button("Mangage Location");
         Button customerMangement = new Button("Manage Customer");
         
+        int width = 150;
+        
+        trackingBtn.setPrefWidth(width);
+        createShipmentBtn.setPrefWidth(width);
+        locationManagement.setPrefWidth(width);
+        customerMangement.setPrefWidth(width);
         
         trackingBtn.setOnAction((evt)->{
             trackingWindow = new TrackingWindow(stage);

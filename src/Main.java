@@ -1,10 +1,7 @@
 import javafx.application.Application;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import main.java.controller.DashboardWindow;
-import main.java.controller.ShipmentWindow;
-import main.java.controller.TrackingWindow;
-import main.java.entity.Shipment;
+import main.java.controller.LoginWindow;
 
 public class Main extends Application {
 
@@ -21,7 +18,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 
-	    loginWindow = new DashboardWindow(stage);
+	    loginWindow = new LoginWindow(stage);
 	    loginWindow.show();
 	}
 }
