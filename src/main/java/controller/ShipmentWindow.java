@@ -99,6 +99,28 @@ public class ShipmentWindow extends Stage {
 
         Label mockLb = new Label();
         mockLb.setPrefWidth(66);
+        
+        quantityTf.setDisable(true);
+        dim1Tf.setDisable(true);
+        dim2Tf.setDisable(true);
+        dim3Tf.setDisable(true);
+        weightTf.setDisable(true);
+        
+        envelopeRb.setOnAction(e->{
+            quantityTf.setDisable(false);
+            dim1Tf.setDisable(true);
+            dim2Tf.setDisable(true);
+            dim3Tf.setDisable(true);
+            weightTf.setDisable(true);
+        });
+        
+        packageRb.setOnAction(e->{
+            quantityTf.setDisable(true);
+            dim1Tf.setDisable(false);
+            dim2Tf.setDisable(false);
+            dim3Tf.setDisable(false);
+            weightTf.setDisable(false);
+        });
 
         evelopeHb.getChildren().addAll(envelopeRb, quantityTf);
         packageHb.getChildren().addAll(packageRb, dim1Tf, dim2Tf);
